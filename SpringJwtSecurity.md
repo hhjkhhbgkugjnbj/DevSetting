@@ -142,7 +142,7 @@ Spring Security에 JWT 인증 적용 후 필요한 설정
 - OAuth2 로그인 설정 (OAuth2UserServiceImplement)
 - 예외 처리 (인증 실패 시 AuthenticationFailEntryPoint)
 
-<JWT 받아오는 흐름>
+# <JWT 받아오는 흐름>
 
 1. 클라이언트가 로그인 API 요청 (ex - /api/v1/login)
 2. 서버가 create()를 호출해서 JWT 생성, 성공 시 클라이언트에 반환
@@ -157,6 +157,7 @@ Spring Security에 JWT 인증 적용 후 필요한 설정
   3. Base64URL 인코딩된 문자열 : Keys.hmacShaKeyFor(Decoders.BASE64URL.decode(secretString));
   4. 인코딩 안된 문자열 : Keys.hmacShaKeyFor(secretString.getBytes(StandardCharsets.UTF-8));
 
+# 실제 예시
 1. protected(나머지 필터는 private을 사용) 필터에서 API 요청 들어올 때마다 try-catch로 헤더에서 토큰 추출 후 검증함.
 2. 검증할 때 provider에서 validate 검증을 사용함(토큰을 넣어서).
 3. 추출 검증 다 되면 시큐리티 컨텍스트에 등록함. 이후 에러처리 필수. 다음 필터에 전달함.
