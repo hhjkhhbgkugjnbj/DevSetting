@@ -148,8 +148,10 @@ Spring Security에 JWT 인증 적용 후 필요한 설정
 2. 서버가 create()를 호출해서 JWT 생성, 성공 시 클라이언트에 반환
 3. 클라이언트는 받은 JWT를 저장
 4. 이후 클라이언트가 API 요청 시 Authorization: Bearer {JWT} 헤더에 포함해서 전달
-5. 서버에서 Filter로 JWT 검증, 유효하면 SecurrityContext에 사용자 정보 저장
+5. 서버에서 Filter로 JWT 검증, 유효하면 SecurityContext에 사용자 정보 저장
 6. SecurityContext에서 사용자 정보 가져와서 요청 처리, @AuthenticationPrincipal로 인증된 사용자 정보 조회 가능
+
+SecurityContext는 요청 받으면 로컬 스레드(메모리)에 저장이 되고, 요청이 끝나면 삭제되는 방식
 
 - jwt Token Signiture 암호화 방식 (jjwt 의존성)
   1. 인코딩된 byte array : SecretKey key = Keys.hmacShaKeyFor(encodedKeyBytes);
